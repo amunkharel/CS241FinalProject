@@ -108,8 +108,11 @@ void edit_student_data_menu()
     {
         strcpy(first, "NULL");
     }
-
-    delete_endline(first);
+    else
+    {
+        delete_endline(first);
+    }
+    
 
     printf("\nEnter new Last Name (or leave blank for no change): ");
     fgets(last, 30, stdin);
@@ -118,8 +121,10 @@ void edit_student_data_menu()
     {
         strcpy(last, "NULL");
     }
-
-    delete_endline(last);
+    else
+    {
+        delete_endline(last);
+    }
 
     //printf(" first name %s\n, last name %s \n ssn %s \n ", first, last, social);
     //return;
