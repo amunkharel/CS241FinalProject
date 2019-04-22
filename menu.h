@@ -61,7 +61,7 @@ void view_data_menu()
 	switch( choice )
 	{
 		case 1:
-			printf( "\n\nViewing Student\n\n" );
+			view_student_data_menu();
 			break;
 		case 2:
 			printf("\n\nViewing Class \n\n");

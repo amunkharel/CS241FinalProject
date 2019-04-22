@@ -6,6 +6,7 @@
 #include "addstudent.h"
 #include "editstudent.h"
 #include "deletestudent.h"
+#include "viewstudent.h"
 #include "menu.h"
 
 
