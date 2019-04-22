@@ -1,7 +1,7 @@
 void edit_student(char *first, char *last, char *social)
 {
     FILE *fp;
-    struct student data; 
+    struct student data;
     int counter = 0;
     int found = 0;
 
@@ -20,19 +20,52 @@ void edit_student(char *first, char *last, char *social)
             found = 1;
             break;
         }
-        counter++;
+        counter++; 
     }
-
-    fseek(fp, counter*sizeof(struct student), SEEK_SET);
 
     if(! found)
     {
         printf("SSN not found in the database\n");
+        fclose(fp);
         return;
     }
     else
     {
-        printf("SSN found\n");
+        fseek(fp, counter*sizeof(struct student), SEEK_SET);
+
+        fread(&data, sizeof(struct student), 1, fp);
+
+        if (strcmp(first,"NULL") == 0 && strcmp(last,"NULL") == 0 )
+        {
+            printf("Nothing in the database changed\n\n");
+            fclose(fp);
+            return;
+        }
+        else if (strcmp(first,"NULL") == 0)
+        {
+            memcpy(data.lname, last, strlen(last)+1);
+            fseek(fp, counter*sizeof(struct student), SEEK_SET);
+            fwrite (&data, sizeof(struct student), 1, fp); 
+            printf("Last Name in the database changed\n\n");
+        }
+        else if (strcmp(last,"NULL") == 0)
+        {
+            memcpy(data.fname, first, strlen(first)+1);
+            fseek(fp, counter*sizeof(struct student), SEEK_SET);
+            fwrite (&data, sizeof(struct student), 1, fp); 
+            printf("First Name in the database changed\n\n");
+
+        }
+        else
+        {
+            memcpy(data.lname, last, strlen(last)+1);
+            memcpy(data.fname, first, strlen(first)+1);
+            fseek(fp, counter*sizeof(struct student), SEEK_SET);
+            fwrite (&data, sizeof(struct student), 1, fp); 
+            printf("Both first Name and last Name database changed\n\n");
+        }
+
+        fclose(fp);
     }
 }
 
@@ -43,15 +76,26 @@ void edit_student_data_menu()
    char first[30];
    char last[30];
 
-    printf("\n Enter SSN: ");
+    printf("\nEnter SSN: ");
     fgets(social, 10, stdin);
     if(social[0] == '\n')
     {
         strcpy(social, "NULL");
     }
 
-    printf("Enter new First Name (or leave blank for no change): ");
+    if(strlen(social) != 9)
+    {
+        printf("Please enter social security number of 9 characters\n");
+        return;
+    }
+    else
+    {
+        getchar();
+    }
+    
+    printf("\nEnter new First Name (or leave blank for no change): ");
     fgets(first, 30, stdin);
+
     if(first[0] == '\n')
     {
         strcpy(first, "NULL");
