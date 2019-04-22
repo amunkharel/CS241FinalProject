@@ -2,6 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 #include"clear_buffer.h"
+#include "structs.h"
+#include "addstudent.h"
+#include "editstudent.h"
 #include "menu.h"
 
 

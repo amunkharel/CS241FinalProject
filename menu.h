@@ -1,6 +1,4 @@
-#include "structs.h"
-#include "addstudent.h"
-#include "editstudent.h"
+
 void view_grades_menu()
 {
 
