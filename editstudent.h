@@ -2,9 +2,7 @@ void edit_student(char *first, char *last, char *social)
 {
     FILE *fp;
     struct student data;
-    char a = '\0';
     int counter = 0;
-    int ch;
     int found = 0;
 
     fp = fopen("student.db", "r+");
