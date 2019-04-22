@@ -18,7 +18,6 @@ void delete_student(char *social)
 
     while(fread(&data, sizeof(struct student), 1, fp))
     {
-        printf("first = %s , last = %s, ssn = %s \n\n", data.fname, data.lname, data.ssn);
         if (strcmp(data.ssn,social) == 0)
         {
             found = 1;
@@ -70,11 +69,11 @@ void delete_student(char *social)
 
             remove("student.db");
             rename("tmp.db", "student.db");
-
+            return;
         }
         else
         {
-            printf("data not deleted");
+            printf("data not deleted\n\n");
         }
 
         fclose(fp);
