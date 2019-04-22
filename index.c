@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include"clear_buffer.h"
 #include "menu.h"
 

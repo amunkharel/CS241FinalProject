@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "clear_buffer.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

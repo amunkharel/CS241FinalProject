@@ -1,6 +1,6 @@
 #include "structs.h"
 #include "addstudent.h"
-
+#include "editstudent.h"
 void view_grades_menu()
 {
 
@@ -152,7 +152,7 @@ void edit_menu()
 	switch( choice )
 	{
 		case 1:
-			printf( "\nEditing Student\n\n" );
+			edit_student_data_menu();
 			break;
 		case 2:
 			printf("\n\nEditing Class \n\n");

@@ -1,8 +1,3 @@
-
-void clear_buffer1() { while( getchar() != '\n' ) {} }
-
-
-
 void add_student(struct student data)
 {
     FILE *fp;
