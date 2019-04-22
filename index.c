@@ -5,6 +5,7 @@
 #include "structs.h"
 #include "addstudent.h"
 #include "editstudent.h"
+#include "deletestudent.h"
 #include "menu.h"
 
 

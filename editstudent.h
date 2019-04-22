@@ -71,7 +71,6 @@ void edit_student(char *first, char *last, char *social)
 
 void edit_student_data_menu()
 {
-   struct student data;
    char social[10];
    char first[30];
    char last[30];

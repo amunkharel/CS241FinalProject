@@ -106,7 +106,7 @@ void delete_menu()
 	switch( choice )
 	{
 		case 1:
-			printf( "\n\nDeleting Student\n\n" );
+			delete_student_data_menu();
 			break;
 		case 2:
 			printf("\n\nDeleting Class \n\n");
