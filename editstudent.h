@@ -2,7 +2,9 @@ void edit_student(char *first, char *last, char *social)
 {
     FILE *fp;
     struct student data;
+    char a = '\0';
     int counter = 0;
+    int ch;
     int found = 0;
 
     fp = fopen("student.db", "r+");
@@ -12,6 +14,7 @@ void edit_student(char *first, char *last, char *social)
         printf("\n Error: Cannot open file");
         exit(1);
     }
+    
 
     while(fread(&data, sizeof(struct student), 1, fp))
     {
@@ -64,9 +67,17 @@ void edit_student(char *first, char *last, char *social)
             fwrite (&data, sizeof(struct student), 1, fp); 
             printf("Both first Name and last Name database changed\n\n");
         }
-
         fclose(fp);
+
+        
     }
+}
+
+void delete_endline(char * input)
+{
+    int i;
+    int length = strlen(input);
+    input[length - 1] = '\0';
 }
 
 void edit_student_data_menu()
@@ -99,7 +110,8 @@ void edit_student_data_menu()
     {
         strcpy(first, "NULL");
     }
-    
+
+    delete_endline(first);
 
     printf("\nEnter new Last Name (or leave blank for no change): ");
     fgets(last, 30, stdin);
@@ -108,6 +120,8 @@ void edit_student_data_menu()
     {
         strcpy(last, "NULL");
     }
+
+    delete_endline(last);
 
     //printf(" first name %s\n, last name %s \n ssn %s \n ", first, last, social);
     //return;

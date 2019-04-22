@@ -18,6 +18,7 @@ void delete_student(char *social)
 
     while(fread(&data, sizeof(struct student), 1, fp))
     {
+        //printf("First name: %s, Last name = %s, ssn = %s \n", data.fname, data.lname, data.ssn);
         if (strcmp(data.ssn,social) == 0)
         {
             found = 1;
