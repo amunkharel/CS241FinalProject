@@ -1,6 +1,5 @@
-#include "add.h"
-
-void clear_buffer() { while( getchar() != '\n' ) {} }
+#include "structs.h"
+#include "addstudent.h"
 
 void view_grades_menu()
 {
@@ -194,7 +193,7 @@ void add_data_menu()
 	{
 		case 1:
 			printf( "\nAdd Student to Database\n\n" );
-			add_student();
+			get_student_data_menu();
 			break;
 		case 2:
 			printf( "\nAdding Class\n\n" );

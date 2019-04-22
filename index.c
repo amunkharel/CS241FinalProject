@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include"clear_buffer.h"
 #include "menu.h"
 
 
@@ -15,4 +15,5 @@ int main(int argc, char * argv[])
         //Command Line Arguments
     }
     
+    return 0;
 }
