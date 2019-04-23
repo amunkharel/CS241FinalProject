@@ -109,7 +109,7 @@ void delete_menu()
 			delete_student_data_menu();
 			break;
 		case 2:
-			printf("\n\nDeleting Class \n\n");
+			delete_class_menu();
 			break;
 		case 3:
 			printf("\n\nDeleting Assignments\n\n");
