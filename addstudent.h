@@ -1,5 +1,24 @@
 void add_student(struct student data)
 {
+    if(strlen(data.fname) < 2)
+    {
+        printf("First Name should be atleast two character \n\n");
+        return;
+    }
+
+
+    if(strlen(data.lname) < 2)
+    {
+        printf("Last Name should be atleast two character \n\n");
+        return;
+    }
+
+    if(strlen(data.ssn) != 9)
+    {
+        printf("Social Security Should have 9 characters \n\n");
+        return;
+    }
+
     FILE *fp;
 
     fp = fopen("student.db", "a");
@@ -13,7 +32,6 @@ void add_student(struct student data)
     printf("Students successsfully added to database!\n"); 
     fclose(fp);
 }
-
 
 void get_student_data_menu()
 {

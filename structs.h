@@ -2,7 +2,7 @@ struct student
 {
     char fname[30];
     char lname[30];
-    char ssn[9];
+    char ssn[10];
 };
 
 struct classes

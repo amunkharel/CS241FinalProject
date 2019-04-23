@@ -60,7 +60,11 @@ void custom_command()
 
 		else if(strcmp( strs[1], "student") == 0 && num_args == 5 )
 		{
-			printf("Add Student\n");
+			struct student data;
+			strcpy(data.fname, strs[2]);
+			strcpy(data.lname, strs[3]);
+			strcpy(data.ssn, strs[4]);
+			add_student(data);
 		}
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 3 )
@@ -195,5 +199,7 @@ void custom_command()
 		printf("Please enter a valid command\n");
 	}
 
+	free(in);
+	free(strs);
 	custom_command();
 }
