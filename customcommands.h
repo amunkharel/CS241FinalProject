@@ -100,7 +100,7 @@ void custom_command()
 	{
 		if(strcmp( strs[1], "student") == 0 && num_args == 5 )
 		{
-			printf("Edit Student\n");
+			edit_student(strs[2], strs[3], strs[4]);
 		}
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 4 )
@@ -128,7 +128,7 @@ void custom_command()
 	{
 		if(strcmp( strs[1], "student") == 0 && num_args == 3 )
 		{
-			printf("Delete Student\n");
+			delete_student(strs[2]);
 		}
 		else if(strcmp( strs[1], "class") == 0 && num_args == 3 )
 		{
@@ -168,7 +168,7 @@ void custom_command()
 	{
 		if(strcmp( strs[1], "students") == 0 && num_args == 2 )
 		{
-			printf("View Students\n");
+			view_student_data_menu();
 		}
 		else if(strcmp( strs[1], "classes") == 0 && num_args == 2 )
 		{

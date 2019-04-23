@@ -1,5 +1,24 @@
 void edit_student(char *first, char *last, char *social)
 {
+    if(strlen(first) < 2)
+    {
+        printf("First Name should be atleast two character \n\n");
+        return;
+    }
+
+
+    if(strlen(last) < 2)
+    {
+        printf("Last Name should be atleast two character \n\n");
+        return;
+    }
+
+    if(strlen(social) != 9)
+    {
+        printf("Social Security Should have 9 characters \n\n");
+        return;
+    }
+
     FILE *fp;
     struct student data;
     int counter = 0;

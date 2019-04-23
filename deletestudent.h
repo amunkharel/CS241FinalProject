@@ -1,5 +1,12 @@
 void delete_student(char *social)
 {
+
+    if(strlen(social) != 9)
+    {
+        printf("Social Security Should have 9 characters to delete student record\n\n");
+        return;
+    }
+
     FILE *fp;
     
     struct student data;
