@@ -15,6 +15,6 @@ void view_student_data_menu()
     {
         printf("\nFirst name: %s, Last name = %s, ssn = %s \n", data.fname, data.lname, data.ssn);
     }
-
+    fclose(fp);
     printf("\n\n");
 }

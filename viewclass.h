@@ -15,5 +15,7 @@ void view_class()
     {
         printf("\nID: %d, Title = %s \n", data.id, data.title);
     }
+    printf("\n\n");
+    fclose(fp);
     return;
 }

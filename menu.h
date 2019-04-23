@@ -153,7 +153,7 @@ void edit_menu()
 			edit_student_data_menu();
 			break;
 		case 2:
-			printf("\n\nEditing Class \n\n");
+			edit_class_menu();
 			break;
 		case 3:
 			printf("\n\nEditing Assignments\n\n");

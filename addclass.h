@@ -1,14 +1,14 @@
 void add_class(char *title)
 {
-    FILE *fp;
-    FILE *nfp;
-    struct classes data;
-
     if(strlen(title) < 5)
     {
         printf("Title must be atleast five characters \n\n");
         return;
     }
+
+    FILE *fp;
+    FILE *nfp;
+    struct classes data;
 
     fp = fopen("classes.db", "r");
     if(fp == NULL)
@@ -18,7 +18,7 @@ void add_class(char *title)
         strcpy(data.title, title);
         fwrite (&data, sizeof(struct classes), 1, nfp); 
         printf("Class added successfully\n\n");
-        fclose(nfp);
+        
     }
     else
     {
@@ -29,10 +29,10 @@ void add_class(char *title)
         strcpy(data.title, title);
         fwrite (&data, sizeof(struct classes), 1, nfp); 
         printf("Class added successfully\n\n");
-        fclose(nfp);
+        
     }
-    
-
+    fclose(nfp);
+    fclose(fp);
 }
 
 void add_class_menu()

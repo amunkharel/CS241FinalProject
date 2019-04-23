@@ -9,6 +9,7 @@
 #include "editstudent.h"
 #include "deletestudent.h"
 #include "viewclass.h"
+#include "editclass.h"
 #include "addclass.h"
 #include "customcommands.h"
 #include "commandline.h"
