@@ -516,6 +516,106 @@ void command_line(int length, char *args[])
         }
         
 	}
+    else if ( length == 2 && strcmp( args[1], "-view-s" ) == 0  )
+    {
+        printf("View Student\n");
+    }
+
+    else if ( length == 2 && strcmp( args[1], "-view-c" ) == 0  )
+    {
+        printf("View Classes\n");
+    }
+
+    else if ( length == 4 && strcmp( args[1], "-view-a" ) == 0  )
+    {
+        for(i = 2; i < length; i = i + 2 )
+        {
+            if(strcmp( args[i], "-cid" ) == 0)
+            {
+                strcpy(par1, args[i+1]);   
+            }
+            else
+            {
+                printf("Please type a valid command\n");
+                return;
+            } 
+        }
+        printf("Class ID = %s \n", par1);
+        printf("View Assignment\n");
+    }
+
+    else if ( length == 6 && strcmp( args[1], "-view-g" ) == 0  )
+	{
+        for(i = 2; i < length; i = i + 2 )
+        {
+            if(strcmp( args[i], "-cid" ) == 0 || strcmp( args[i], "-aid" ) == 0 )
+            {
+                if(strcmp( args[i], "-cid" ) == 0 )
+                {
+                    strcpy(par1, args[i+1]);
+                }
+
+                else if(strcmp( args[i], "-aid" ) == 0 )
+                {
+                    strcpy(par2, args[i+1]);
+                }
+            }
+            else
+            {
+                printf("Please type a valid command\n");
+                return;
+            } 
+        }
+
+        if(strcmp( par1, "NULL" ) == 0 || strcmp( par2, "NULL" ) == 0 )
+        {
+            printf("Please type a valid command\n");
+            return;
+        }
+        else
+        {
+            printf("Class Id = %s , AID = %s\n", par1, par2);
+            printf("View Grades\n");
+        }
+        
+	}
+
+    else if ( length == 6 && strcmp( args[1], "-view-g-avg" ) == 0  )
+	{
+        for(i = 2; i < length; i = i + 2 )
+        {
+            if(strcmp( args[i], "-cid" ) == 0 || strcmp( args[i], "-aid" ) == 0 )
+            {
+                if(strcmp( args[i], "-cid" ) == 0 )
+                {
+                    strcpy(par1, args[i+1]);
+                }
+
+                else if(strcmp( args[i], "-aid" ) == 0 )
+                {
+                    strcpy(par2, args[i+1]);
+                }
+            }
+            else
+            {
+                printf("Please type a valid command\n");
+                return;
+            } 
+        }
+
+        if(strcmp( par1, "NULL" ) == 0 || strcmp( par2, "NULL" ) == 0 )
+        {
+            printf("Please type a valid command\n");
+            return;
+        }
+        else
+        {
+            printf("Class Id = %s , AID = %s\n", par1, par2);
+            printf("View Average Grade\n");
+        }
+        
+	}
+
 
     else
     {
