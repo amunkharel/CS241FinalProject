@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 #include"clear_buffer.h"
 #include "structs.h"
 #include "viewstudent.h"
@@ -8,6 +9,7 @@
 #include "editstudent.h"
 #include "deletestudent.h"
 #include "customcommands.h"
+#include "commandline.h"
 #include "menu.h"
 
 
@@ -19,7 +21,7 @@ int main(int argc, char * argv[])
     }
     else
     {
-        //Command Line Arguments
+        command_line( argc, argv);
     }
     
     return 0;
