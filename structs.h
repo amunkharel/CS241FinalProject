@@ -14,7 +14,7 @@ struct classes
 struct enrollement
 {
     int id;
-    char ssn[9];
+    char ssn[10];
 };
 
 struct assignment
@@ -28,6 +28,6 @@ struct assignment
 struct grades
 {
     int class_id;
-    char ssn[9];
+    char ssn[10];
     int grade;
 };

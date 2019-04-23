@@ -3,7 +3,7 @@ void view_student_data_menu()
     FILE *fp;
     
     struct student data;
-    fp = fopen("student.db", "r");
+    fp = fopen("students.db", "r");
 
     if(fp == NULL)
     {

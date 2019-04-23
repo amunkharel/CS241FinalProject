@@ -8,6 +8,8 @@
 #include "addstudent.h"
 #include "editstudent.h"
 #include "deletestudent.h"
+#include "viewclass.h"
+#include "addclass.h"
 #include "customcommands.h"
 #include "commandline.h"
 #include "menu.h"

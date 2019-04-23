@@ -64,7 +64,7 @@ void view_data_menu()
 			view_student_data_menu();
 			break;
 		case 2:
-			printf("\n\nViewing Class \n\n");
+			view_class();
 			break;
 		case 3:
 			printf("\n\nViewing Assignments\n\n");
@@ -190,11 +190,10 @@ void add_data_menu()
 	switch( choice )
 	{
 		case 1:
-			printf( "\nAdd Student to Database\n\n" );
 			get_student_data_menu();
 			break;
 		case 2:
-			printf( "\nAdding Class\n\n" );
+			add_class_menu();
 			break;
 		case 3:
 			printf( "\nAdding Assignment\n\n" );

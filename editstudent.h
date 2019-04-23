@@ -24,7 +24,7 @@ void edit_student(char *first, char *last, char *social)
     int counter = 0;
     int found = 0;
 
-    fp = fopen("student.db", "r+");
+    fp = fopen("students.db", "r+");
     
     if(fp == NULL)
     {
@@ -88,13 +88,6 @@ void edit_student(char *first, char *last, char *social)
 
         
     }
-}
-
-void delete_endline(char * input)
-{
-    int i;
-    int length = strlen(input);
-    input[length - 1] = '\0';
 }
 
 void edit_student_data_menu()

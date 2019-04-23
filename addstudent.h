@@ -21,7 +21,7 @@ void add_student(struct student data)
 
     FILE *fp;
 
-    fp = fopen("student.db", "a");
+    fp = fopen("students.db", "a");
     if(fp == NULL)
     {
         printf("\n Error: Cannot Open File");

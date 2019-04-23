@@ -13,7 +13,7 @@ void delete_student(char *social)
     int counter = 0;
     int found = 0;
     int response;
-    fp = fopen("student.db", "r");
+    fp = fopen("students.db", "r");
 
     
 
@@ -75,8 +75,8 @@ void delete_student(char *social)
             fclose(fp);
             fclose(fp_tmp);
 
-            remove("student.db");
-            rename("tmp.db", "student.db");
+            remove("students.db");
+            rename("tmp.db", "students.db");
             return;
         }
         else
