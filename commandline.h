@@ -56,8 +56,11 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("First = %s , Last = %s, SSN = %s \n", par1, par2, par3);
-            printf("Add students\n");
+            struct student data;
+			strcpy(data.fname, par1);
+			strcpy(data.lname, par2);
+			strcpy(data.ssn, par3);
+            add_student(data);
         }
         
 	}
@@ -236,8 +239,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("SSN = %s , First Name = %s, Last Name = %s \n", par1, par2, par3);
-            printf("Edit Student\n");
+            edit_student(par2, par3, par1);
         }
         
 	}
@@ -383,8 +385,7 @@ void command_line(int length, char *args[])
                 return;
             } 
         }
-        printf("SSN = %s \n", par1);
-        printf("Delete Student\n");
+        delete_student(par1);
     }
 
     else if ( length == 4 && strcmp( args[1], "-delete-class" ) == 0  )
@@ -518,7 +519,7 @@ void command_line(int length, char *args[])
 	}
     else if ( length == 2 && strcmp( args[1], "-view-s" ) == 0  )
     {
-        printf("View Student\n");
+        view_student_data_menu();
     }
 
     else if ( length == 2 && strcmp( args[1], "-view-c" ) == 0  )
