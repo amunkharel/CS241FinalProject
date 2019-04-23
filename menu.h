@@ -70,7 +70,7 @@ void view_data_menu()
 			printf("\n\nViewing Assignments\n\n");
 			break;
 		case 4:
-			printf("\n\nViewing Grade \n\n");
+			view_grades_menu();
 			break;
 		case 5:
 			printf("\n\nViweing Student Enrollement\n\n");
@@ -223,10 +223,9 @@ void main_menu()
 	printf( "2. Edit Data\n" );
 	printf( "3. Delete Data\n" );
 	printf( "4. View Data\n" );
-	printf( "5. View Grades\n" );
-	printf( "6. Use Command Line Argument\n" );
-	printf( "7. Exit\n" );
-	printf( "Please enter 1-7: " );
+	printf( "5. Use Command Line Argument\n" );
+	printf( "6. Exit\n" );
+	printf( "Please enter 1-6: " );
 
 	scanf( "%d", &choice );
 	
@@ -246,14 +245,10 @@ void main_menu()
 		case 4:
 			view_data_menu();
 			break;
-
 		case 5:
-			view_grades_menu();
+			custom_command();
 			break;
-		case 6:
-			printf( "\nWe're using command Line Argument\n\n" );
-			break;
-		case 7: 
+		case 6: 
 			return;
 		default:
 			printf( "\nPlease type a number from 1-5\n\n" );

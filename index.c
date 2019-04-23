@@ -3,10 +3,11 @@
 #include<string.h>
 #include"clear_buffer.h"
 #include "structs.h"
+#include "viewstudent.h"
 #include "addstudent.h"
 #include "editstudent.h"
 #include "deletestudent.h"
-#include "viewstudent.h"
+#include "customcommands.h"
 #include "menu.h"
 
 
