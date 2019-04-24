@@ -69,7 +69,7 @@ void custom_command()
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 3 )
 		{
-			printf("Add Class\n");
+			add_class(strs[2]);
 		}
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 5 )
@@ -105,7 +105,7 @@ void custom_command()
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 4 )
 		{
-			printf("Edit Class\n");
+			edit_class(atoi(strs[2]), strs[3]);
 		}
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 6 )
@@ -132,7 +132,7 @@ void custom_command()
 		}
 		else if(strcmp( strs[1], "class") == 0 && num_args == 3 )
 		{
-			printf("Delete Class\n");
+			delete_class(atoi(strs[2]));
 		}
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 4 )
@@ -172,7 +172,7 @@ void custom_command()
 		}
 		else if(strcmp( strs[1], "classes") == 0 && num_args == 2 )
 		{
-			printf("View Classes\n");
+			view_class();
 		}
 
 		else if(strcmp( strs[1], "assignments") == 0 && num_args == 3 )
