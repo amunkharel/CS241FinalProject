@@ -79,8 +79,7 @@ void command_line(int length, char *args[])
                 return;
             } 
         }
-        printf("Title = %s \n", par1);
-        printf("Add class\n");
+        add_class(par1);
     }
 
 
@@ -274,8 +273,8 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , Title = %s\n", par1, par2);
-            printf("Edit Class\n");
+            i = atoi(par1);
+            edit_class(i, par2);
         }
         
 	}
@@ -402,8 +401,8 @@ void command_line(int length, char *args[])
                 return;
             } 
         }
-        printf("Class ID = %s \n", par1);
-        printf("Delete Class\n");
+        i = atoi(par1);
+        delete_class(i);
     }
 
     else if ( length == 6 && strcmp( args[1], "-delete-assignment" ) == 0  )
@@ -524,7 +523,7 @@ void command_line(int length, char *args[])
 
     else if ( length == 2 && strcmp( args[1], "-view-c" ) == 0  )
     {
-        printf("View Classes\n");
+        view_class();
     }
 
     else if ( length == 4 && strcmp( args[1], "-view-a" ) == 0  )
