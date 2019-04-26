@@ -67,7 +67,7 @@ void view_data_menu()
 			view_class();
 			break;
 		case 3:
-			printf("\n\nViewing Assignments\n\n");
+			view_assignment();
 			break;
 		case 4:
 			view_grades_menu();
@@ -196,7 +196,7 @@ void add_data_menu()
 			add_class_menu();
 			break;
 		case 3:
-			printf( "\nAdding Assignment\n\n" );
+			add_assignment_menu();
 			break;
 		case 4:
 			printf( "\nEnrolling Student\n\n" );
