@@ -156,7 +156,7 @@ void edit_menu()
 			edit_class_menu();
 			break;
 		case 3:
-			printf("\n\nEditing Assignments\n\n");
+			edit_assignment_menu();
 			break;
 		case 4:
 			printf("\n\nEditing Grade \n\n");

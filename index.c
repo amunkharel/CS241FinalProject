@@ -14,6 +14,7 @@
 #include "deleteclass.h"
 #include "viewassignment.h"
 #include "addassignment.h"
+#include "editassignment.h"
 #include "customcommands.h"
 #include "commandline.h"
 #include "menu.h"
