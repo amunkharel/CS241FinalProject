@@ -19,16 +19,16 @@ void view_grades_menu()
 	switch( choice )
 	{
 		case 1:
-			printf( "\n\nViewing Class Average Grade\n\n" );
+			view_average_class_grade_menu();
 			break;
 		case 2:
-			printf("\n\nViewing Student Average Grades\n\n");
+			view_average_student_grade_menu();
 			break;
 		case 3:
-			printf("\n\nView Class Assignment Average Grades\n\n");
+			view_class_assignment_average_grade_menu();
 			break;
 		case 4:
-			printf("\n\nView Class Assignment Grades \n\n");
+			view_class_assignment_grade_menu();
 			break;
 		case 5:
 			return;
@@ -67,13 +67,13 @@ void view_data_menu()
 			view_class();
 			break;
 		case 3:
-			view_assignment();
+			view_assignment_menu();
 			break;
 		case 4:
 			view_grades_menu();
 			break;
 		case 5:
-			printf("\n\nViweing Student Enrollement\n\n");
+			view_enrollment_menu();
 			break;
 		case 6:
 			return;
@@ -112,13 +112,13 @@ void delete_menu()
 			delete_class_menu();
 			break;
 		case 3:
-			printf("\n\nDeleting Assignments\n\n");
+			delete_assignment_menu();
 			break;
 		case 4:
-			printf("\n\nDeleting Grade \n\n");
+			delete_grade_menu();
 			break;
 		case 5:
-			printf("\n\nDropping Student \n\n");
+			delete_enrollment_menu();
 			break;
 		case 6:
 			return;
@@ -159,7 +159,7 @@ void edit_menu()
 			edit_assignment_menu();
 			break;
 		case 4:
-			printf("\n\nEditing Grade \n\n");
+			edit_grade_menu();
 			break;
 		case 5:
 			return;
@@ -199,10 +199,10 @@ void add_data_menu()
 			add_assignment_menu();
 			break;
 		case 4:
-			printf( "\nEnrolling Student\n\n" );
+			add_grade_menu();
 			break;
 		case 5:
-			printf( "\nAdding Grade\n\n" );
+			enroll_student_menu();
 			break;
 		case 6: 
 			return;

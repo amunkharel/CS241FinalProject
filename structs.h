@@ -2,22 +2,22 @@ struct student
 {
     char fname[30];
     char lname[30];
-    char ssn[10];
+    char ssn[9];
 };
 
-struct classes
+struct __attribute__((packed)) classes
 {
     int id;
     char title[30];
 };
 
-struct enrollement
+struct __attribute__((packed)) enrollment
 {
-    int id;
-    char ssn[10];
+    int class_id;
+    char ssn[9];
 };
 
-struct assignment
+struct __attribute__((packed)) assignment
 {
     int id;
     char title[30];
@@ -25,9 +25,10 @@ struct assignment
     int class_id;
 };
 
-struct grades
+struct __attribute__((packed)) grades
 {
-    int class_id;
-    char ssn[10];
+    int aid;
+    char ssn[9];
     int grade;
 };
+

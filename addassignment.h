@@ -21,16 +21,11 @@ int check_valid_class_id(int id)
     return 0;
 }
 
-void add_assignment(int class_id, char * title, int point)
+void add_assignment(int class_id, char * title_name, int point)
 {
     if(! check_valid_class_id(class_id))
     {
         printf("Not a valid class Id\n");
-        return;
-    }
-    if(strlen(title) < 5)
-    {
-        printf("Assignment Title must be atleast 5 characters \n");
         return;
     }
 
@@ -39,6 +34,10 @@ void add_assignment(int class_id, char * title, int point)
         printf("Point must be between 0 and 100 \n");
         return;
     }
+
+    char title[30];
+    memcpy(title, title_name, 30);
+    null_terminate_name(title, strlen(title));
     FILE *fp;
     FILE *nfp;
     struct assignment data;
@@ -48,7 +47,7 @@ void add_assignment(int class_id, char * title, int point)
     {
         nfp = fopen("assignments.db", "w");
         data.id = 1;
-        strcpy(data.title, title);
+        memcpy(data.title, title, 30);
         data.class_id = class_id;
         data.point = point;
         fwrite (&data, sizeof(struct assignment), 1, nfp); 
@@ -61,14 +60,14 @@ void add_assignment(int class_id, char * title, int point)
         fread(&data, sizeof(struct assignment), 1, fp);
         data.id = data.id + 1;
         nfp = fopen("assignments.db", "a");
-        strcpy(data.title, title);
+        memcpy(data.title, title, 30);
         data.class_id = class_id;
         data.point = point;
         fwrite (&data, sizeof(struct assignment), 1, nfp); 
         printf("Assignment added successfully\n\n");
         
     }
-    fclose(nfp);
+    fp = nfp;
     fclose(fp);
     
 }
@@ -77,11 +76,11 @@ void add_assignment_menu()
 {
     int class_id;
     int point;
-    char title[30];
+    char title[31];
 
     printf("Enter Class ID or (-1 for Class List): ");
     scanf("%d", &class_id);
-    getchar();
+    clear_buffer();
     if(class_id == -1)
     {
         view_class();
@@ -90,16 +89,28 @@ void add_assignment_menu()
         
     }
     printf("\nEnter Assignment Title: ");
-    fgets(title, 30, stdin);
-    delete_endline(title);
+    fgets(title, 31, stdin);
+    if(title[0] == '\n')
+    {
+        printf("Title Cannot be empty\n");
+        return;
+    }
+
+    else if(strlen(title) <= 30)
+    {
+        delete_endline(title);
+    }
+
+    else
+    {
+        delete_endline(title);
+        getchar();
+    }
 
     printf("Enter Point Value (1-100)");
     scanf("%d", &point);
 
-    getchar();
-
-    //printf("%lu\n", strlen(title));
-    //printf("Class_id = %d, title = %s, point = %d \n", class_id, title, point);
+    clear_buffer();
 
     add_assignment(class_id, title, point);
 

@@ -13,7 +13,28 @@ void view_student_data_menu()
     printf("\n\nStudents in the database\n");
     while(fread(&data, sizeof(struct student), 1, fp))
     {
-        printf("\nFirst name: %s, Last name = %s, ssn = %s \n", data.fname, data.lname, data.ssn);
+        int i = 0;
+
+        printf("First Name: ");
+        for (i = 0; i < 30; i++)
+        {
+            printf("%c", data.fname[i]);
+        }
+
+        printf(", Last Name: ");
+        for (i = 0; i < 30; i++)
+        {
+            printf("%c", data.lname[i]);
+        }
+
+        printf(", SSN: ");
+        for (i = 0; i < 9; i++)
+        {
+            printf("%c", data.ssn[i]);
+        }
+
+        
+        printf("\n");
     }
     fclose(fp);
     printf("\n\n");

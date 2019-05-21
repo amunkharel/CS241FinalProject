@@ -44,27 +44,46 @@ void custom_command()
 		
 		index++;
 	}
-	
+
 	if ( num_args == 1 && strcmp( strs[0], "exit" ) == 0  )
 	{
-			return;
+		in = NULL;
+		strs = NULL;
+		free(in);
+		free(strs);
+		exit(0);
+	}
+
+	if ( num_args == 1 && strcmp( strs[0], "quit" ) == 0  )
+	{
+		in = NULL;
+		strs = NULL;
+		free(in);
+		free(strs);
+		exit(0);
+	}
+
+	if ( num_args == 1 && strcmp( strs[0], "use_menus" ) == 0  )
+	{
+		in = NULL;
+		strs = NULL;
+		free(in);
+		free(strs);
+		return;
 	}
 
 
-	else if ( strcmp( strs[0], "add" ) == 0 )
+	else if ( strcmp( strs[0], "add" ) == 0 && num_args > 2 && num_args < 7)
 	{
 		if(strcmp( strs[1], "grade") == 0 && num_args == 6 )
 		{
-			printf("Add Grade\n");
+			add_grade( atoi(strs[2]), atoi(strs[3]), strs[4], atoi(strs[5]));
 		}
 
 		else if(strcmp( strs[1], "student") == 0 && num_args == 5 )
 		{
-			struct student data;
-			strcpy(data.fname, strs[2]);
-			strcpy(data.lname, strs[3]);
-			strcpy(data.ssn, strs[4]);
-			add_student(data);
+
+			add_student(strs[2], strs[3], strs[4]);
 		}
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 3 )
@@ -74,7 +93,7 @@ void custom_command()
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 5 )
 		{
-			printf("Add Assignment\n");
+			add_assignment(atoi(strs[2]), strs[3], atoi(strs[4]));
 		}
 
 		else
@@ -86,7 +105,7 @@ void custom_command()
 	{
 		if(num_args == 3)
 		{
-			printf("Enroll Student\n");
+			enroll_student(atoi(strs[1]), strs[2]);
 		}
 
 		else
@@ -96,11 +115,11 @@ void custom_command()
 		
 	}
 
-	else if ( strcmp( strs[0], "edit" ) == 0 )
+	else if ( strcmp( strs[0], "edit" ) == 0 && num_args > 3 && num_args < 7)
 	{
 		if(strcmp( strs[1], "student") == 0 && num_args == 5 )
 		{
-			edit_student(strs[2], strs[3], strs[4]);
+			edit_student(strs[3], strs[4], strs[2]);
 		}
 
 		else if(strcmp( strs[1], "class") == 0 && num_args == 4 )
@@ -110,12 +129,12 @@ void custom_command()
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 6 )
 		{
-			printf("Edit Assignment\n");
+			edit_assignment(atoi(strs[2]), atoi(strs[3]), strs[4], atoi(strs[5]));
 		}
 
 		else if(strcmp( strs[1], "grade") == 0 && num_args == 6 )
 		{
-			printf("Edit Grade\n");
+			edit_grade(atoi(strs[2]), atoi(strs[3]), strs[4], atoi(strs[5]));
 		}
 		else
 		{
@@ -124,7 +143,7 @@ void custom_command()
 		
 	}
 
-	else if ( strcmp( strs[0], "delete" ) == 0 )
+	else if ( strcmp( strs[0], "delete" ) == 0 && num_args > 2 && num_args < 6)
 	{
 		if(strcmp( strs[1], "student") == 0 && num_args == 3 )
 		{
@@ -137,12 +156,12 @@ void custom_command()
 
 		else if(strcmp( strs[1], "assignment") == 0 && num_args == 4 )
 		{
-			printf("Delete assignment\n");
+			delete_assignment(atoi(strs[2]), atoi(strs[3]));
 		}
 
 		else if(strcmp( strs[1], "grade") == 0 && num_args == 5 )
 		{
-			printf("Delete Grade\n");
+			delete_grade(atoi(strs[2]), atoi(strs[3]), strs[4]);
 		}
 		else
 		{
@@ -154,7 +173,7 @@ void custom_command()
 	{
 		if(num_args == 3)
 		{
-			printf("Drop Student\n");
+			drop_student(atoi(strs[1]), strs[2]);
 		}
 
 		else
@@ -164,7 +183,7 @@ void custom_command()
 		
 	}
 
-	else if ( strcmp( strs[0], "view" ) == 0 )
+	else if ( strcmp( strs[0], "view" ) == 0 && num_args > 1 && num_args < 6)
 	{
 		if(strcmp( strs[1], "students") == 0 && num_args == 2 )
 		{
@@ -177,16 +196,25 @@ void custom_command()
 
 		else if(strcmp( strs[1], "assignments") == 0 && num_args == 3 )
 		{
-			printf("View assignments\n");
+			view_assignment_cid(atoi(strs[2]));
 		}
 
 		else if(strcmp( strs[1], "grades") == 0 && num_args == 4 )
 		{
-			printf("View Grades\n");
+			if(strlen(strs[2]) != 9)
+			{
+				view_class_assignment_grade(atoi(strs[2]), atoi(strs[3]));
+			}
+
+			else
+			{
+				view_student_class_grade(strs[2], atoi(strs[3]));
+			}
+			
 		}
 		else if(strcmp( strs[1], "average") == 0 && strcmp( strs[2], "grade") == 0 && num_args == 5)
 		{
-			printf("View Average Grade\n");
+			view_average_class_assignment_grade(atoi(strs[3]), atoi(strs[4]));
 		}
 
 		else
@@ -197,9 +225,12 @@ void custom_command()
 	else
 	{
 		printf("Please enter a valid command\n");
-	}
+	} 
 
+	in = NULL;
+	strs = NULL;
 	free(in);
 	free(strs);
+
 	custom_command();
 }

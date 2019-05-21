@@ -1,6 +1,5 @@
 void command_line(int length, char *args[])
 {
-    //Change arguments from user for effective handling
     int i = 1;
     int j = 0;
     char par1[30];
@@ -20,7 +19,6 @@ void command_line(int length, char *args[])
         }
     }
 
-    //printf("length = %d,  argument = %s \n", length, args[1]);
 
     if ( length == 8 && strcmp( args[1], "-add-student" ) == 0  )
 	{
@@ -56,11 +54,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            struct student data;
-			strcpy(data.fname, par1);
-			strcpy(data.lname, par2);
-			strcpy(data.ssn, par3);
-            add_student(data);
+            add_student(par1, par2, par3);
         }
         
 	}
@@ -117,8 +111,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , Title = %s, PointValue = %s \n", par1, par2, par3);
-            printf("Add Assignment\n");
+            add_assignment(atoi(par1), par2, atoi(par3));
         }
         
 	}
@@ -162,8 +155,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , Assignment Id = %s, Student SSN = %s ,  Points = %s \n", par1, par2, par3,par4);
-            printf("Add Grade\n");
+            add_grade(atoi(par1), atoi(par2) , par3, atoi(par4));
         }
         
 	}
@@ -198,8 +190,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , SSN = %s\n", par1, par2);
-            printf("Enroll Student\n");
+            enroll_student(atoi(par1), par2);
         }
         
 	}
@@ -319,8 +310,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , Assignment Id = %s,  Title = %s ,  Points = %s \n", par1, par2, par3,par4);
-            printf("Edit Assignment\n");
+            edit_assignment(atoi(par1), atoi(par2),  par3,  atoi(par4));
         }
         
 	}
@@ -364,8 +354,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , Assignment Id = %s,  Student SSN = %s ,  Points = %s \n", par1, par2, par3,par4);
-            printf("Edit Grade\n");
+            edit_grade(atoi(par1), atoi(par2) , par3, atoi(par4));
         }
         
 	}
@@ -435,8 +424,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , AID = %s\n", par1, par2);
-            printf("Delete Assignment\n");
+            delete_assignment( atoi(par1), atoi(par2));
         }
         
 	}
@@ -475,8 +463,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("CID = %s , AID = %s, SSN = %s \n", par1, par2, par3);
-            printf("Delete Grade\n");
+            delete_grade(atoi(par1), atoi(par2), par3);
         }
         
 	}
@@ -511,8 +498,7 @@ void command_line(int length, char *args[])
         }
         else
         {
-            printf("Class Id = %s , SSN = %s\n", par1, par2);
-            printf("Drop Student\n");
+            drop_student( atoi(par1), par2);
         }
         
 	}
@@ -540,15 +526,14 @@ void command_line(int length, char *args[])
                 return;
             } 
         }
-        printf("Class ID = %s \n", par1);
-        printf("View Assignment\n");
+        view_assignment_cid(atoi(par1));
     }
 
     else if ( length == 6 && strcmp( args[1], "-view-g" ) == 0  )
 	{
         for(i = 2; i < length; i = i + 2 )
         {
-            if(strcmp( args[i], "-cid" ) == 0 || strcmp( args[i], "-aid" ) == 0 )
+            if(strcmp( args[i], "-cid" ) == 0 || strcmp( args[i], "-aid" ) == 0 || strcmp( args[i], "-s" ) == 0)
             {
                 if(strcmp( args[i], "-cid" ) == 0 )
                 {
@@ -559,6 +544,11 @@ void command_line(int length, char *args[])
                 {
                     strcpy(par2, args[i+1]);
                 }
+
+                else if(strcmp( args[i], "-s" ) == 0 )
+                {
+                    strcpy(par3, args[i+1]);
+                }
             }
             else
             {
@@ -567,15 +557,14 @@ void command_line(int length, char *args[])
             } 
         }
 
-        if(strcmp( par1, "NULL" ) == 0 || strcmp( par2, "NULL" ) == 0 )
+        if(strcmp( par1, "NULL" ) != 0 && strcmp( par2, "NULL" ) != 0 )
         {
-            printf("Please type a valid command\n");
-            return;
+            view_class_assignment_grade( atoi(par1), atoi(par2));
         }
-        else
+
+        if(strcmp( par1, "NULL" ) != 0 && strcmp( par3, "NULL" ) != 0 )
         {
-            printf("Class Id = %s , AID = %s\n", par1, par2);
-            printf("View Grades\n");
+            view_student_class_grade(par3, atoi(par1));
         }
         
 	}
@@ -611,7 +600,7 @@ void command_line(int length, char *args[])
         else
         {
             printf("Class Id = %s , AID = %s\n", par1, par2);
-            printf("View Average Grade\n");
+            view_average_class_assignment_grade(atoi(par1), atoi(par2));
         }
         
 	}

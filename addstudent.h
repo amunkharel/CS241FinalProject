@@ -1,25 +1,29 @@
-void add_student(struct student data)
+void add_student(char * first, char *last, char *ssn)
 {
-    if(strlen(data.fname) < 2)
-    {
-        printf("First Name should be atleast two character \n\n");
-        return;
-    }
 
-
-    if(strlen(data.lname) < 2)
-    {
-        printf("Last Name should be atleast two character \n\n");
-        return;
-    }
-
-    if(strlen(data.ssn) != 9)
+    if(strlen(ssn) != 9)
     {
         printf("Social Security Should have 9 characters \n\n");
         return;
     }
 
+   char fname[30];
+   char lname[30];
+   char social[9];
+
+   memcpy(fname, first, 30);
+   memcpy(lname, last, 30);
+   memcpy(social, ssn, 9);
+
     FILE *fp;
+
+    struct student data;
+
+    null_terminate_name(fname, strlen(fname));
+    null_terminate_name(lname, strlen(lname));
+    memcpy(data.fname, fname, 30);
+    memcpy(data.lname, lname, 30);
+    memcpy(data.ssn, social, 9);
 
     fp = fopen("students.db", "a");
     if(fp == NULL)
@@ -30,23 +34,73 @@ void add_student(struct student data)
 
     fwrite (&data, sizeof(struct student), 1, fp); 
     printf("Students successsfully added to database!\n"); 
-    fclose(fp);
+    fclose(fp); 
 }
 
 void get_student_data_menu()
 {
-    struct student data;
+    char first[31];
+    char last[31];
+    char ssn[12];
 
     printf("Enter First Name: ");
-    scanf("%s", data.fname);
-    clear_buffer();
+    fgets(first, 31, stdin);
+    if(first[0] == '\n')
+    {
+        printf("First Name Cannot be empty\n");
+        return;
+    }
 
-    printf("\nEnter Last Name: ");
-    scanf("%s", data.lname);
+    else if(strlen(first) <= 30)
+    {
+        delete_endline(first);
+    }
 
-    printf("\n Enter SSN: ");
-    scanf("%s", data.ssn);
+    else
+    {
+        delete_endline(first);
+        getchar();
+    }
+    
+    printf("Enter Last Name: ");
+    fgets(last, 31, stdin);
+    if(last[0] == '\n')
+    {
+        printf("Last Name Cannot be empty\n");
+        return;
+    }
 
-    add_student(data);
+    else if(strlen(last) <= 30)
+    {
+        delete_endline(last);
+    }
+
+    else
+    {
+        delete_endline(last);
+        getchar();
+    }
+
+
+    printf("Enter SSN: ");
+    fgets(ssn, 12, stdin);
+    if(strlen(ssn) > 10)
+    {
+        printf("SSN should have 9 characters\n");
+        return;
+    }
+
+    else if(strlen(ssn) < 10)
+    {
+        printf("SSN should have 9 characters\n");
+        return;
+    }
+
+    else
+    {
+        delete_endline_ssn(ssn);
+    }
+
+    add_student(first, last, ssn);
 
 }

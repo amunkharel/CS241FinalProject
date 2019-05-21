@@ -1,17 +1,5 @@
 void edit_student(char *first, char *last, char *social)
 {
-    if(strlen(first) < 2)
-    {
-        printf("First Name should be atleast two character \n\n");
-        return;
-    }
-
-
-    if(strlen(last) < 2)
-    {
-        printf("Last Name should be atleast two character \n\n");
-        return;
-    }
 
     if(strlen(social) != 9)
     {
@@ -23,6 +11,13 @@ void edit_student(char *first, char *last, char *social)
     struct student data;
     int counter = 0;
     int found = 0;
+    char fname[30];
+    char lname[30];
+    char ssn[9];
+
+    memcpy(fname, first, 30);
+    memcpy(lname, last, 30);
+    memcpy(ssn, social, 9);
 
     fp = fopen("students.db", "r+");
     
@@ -35,7 +30,7 @@ void edit_student(char *first, char *last, char *social)
 
     while(fread(&data, sizeof(struct student), 1, fp))
     {
-        if (strcmp(data.ssn,social) == 0)
+        if (strncmp(data.ssn,ssn,9) == 0)
         {
             found = 1;
             break;
@@ -63,14 +58,16 @@ void edit_student(char *first, char *last, char *social)
         }
         else if (strcmp(first,"NULL") == 0)
         {
-            memcpy(data.lname, last, strlen(last)+1);
+            null_terminate_name(lname, strlen(lname));
+            memcpy(data.lname, lname, 30);
             fseek(fp, counter*sizeof(struct student), SEEK_SET);
             fwrite (&data, sizeof(struct student), 1, fp); 
             printf("Last Name in the database changed\n\n");
         }
         else if (strcmp(last,"NULL") == 0)
         {
-            memcpy(data.fname, first, strlen(first)+1);
+            null_terminate_name(fname, strlen(fname));
+            memcpy(data.fname, fname, 30);
             fseek(fp, counter*sizeof(struct student), SEEK_SET);
             fwrite (&data, sizeof(struct student), 1, fp); 
             printf("First Name in the database changed\n\n");
@@ -78,8 +75,10 @@ void edit_student(char *first, char *last, char *social)
         }
         else
         {
-            memcpy(data.lname, last, strlen(last)+1);
-            memcpy(data.fname, first, strlen(first)+1);
+            null_terminate_name(lname, strlen(lname));
+            null_terminate_name(fname, strlen(fname));
+            memcpy(data.lname, lname, 30);
+            memcpy(data.fname, fname, 30);
             fseek(fp, counter*sizeof(struct student), SEEK_SET);
             fwrite (&data, sizeof(struct student), 1, fp); 
             printf("Both first Name and last Name database changed\n\n");
@@ -92,54 +91,66 @@ void edit_student(char *first, char *last, char *social)
 
 void edit_student_data_menu()
 {
-   char social[10];
-   char first[30];
-   char last[30];
+   char ssn[12];
+   char first[31];
+   char last[31];
 
-    printf("\nEnter SSN: ");
-    fgets(social, 10, stdin);
-    if(social[0] == '\n')
+    printf("Enter SSN: ");
+    fgets(ssn, 12, stdin);
+    if(strlen(ssn) > 10)
     {
-        strcpy(social, "NULL");
-    }
-
-    if(strlen(social) != 9)
-    {
-        printf("Please enter social security number of 9 characters\n");
+        printf("SSN should have 9 characters\n");
         return;
     }
+
+    else if(strlen(ssn) < 10)
+    {
+        printf("SSN should have 9 characters\n");
+        return;
+    }
+
     else
     {
-        getchar();
+        delete_endline_ssn(ssn);
     }
-    
-    printf("\nEnter new First Name (or leave blank for no change): ");
-    fgets(first, 30, stdin);
+
+    printf("Enter First Name (or leave blank for no change): ");
+    fgets(first, 31, stdin);
 
     if(first[0] == '\n')
     {
         strcpy(first, "NULL");
     }
-    else
+
+    else if(strlen(first) <= 30)
     {
         delete_endline(first);
     }
-    
 
-    printf("\nEnter new Last Name (or leave blank for no change): ");
-    fgets(last, 30, stdin);
+    else
+    {
+        delete_endline(first);
+        getchar();
+    }
+
+    printf("Enter Last Name (or leave blank for no change): ");
+    fgets(last, 31, stdin);
 
     if(last[0] == '\n')
     {
         strcpy(last, "NULL");
     }
-    else
+
+    else if(strlen(last) <= 30)
     {
         delete_endline(last);
     }
 
-    //printf(" first name %s\n, last name %s \n ssn %s \n ", first, last, social);
-    //return;
-
-    edit_student(first, last, social);
+    else
+    {
+        delete_endline(last);
+        getchar();
+    }
+    
+    edit_student(first, last, ssn);
 }

@@ -24,8 +24,9 @@ int check_valid_assignment_id(int id)
     return 0;
 }
 
-void edit_assignment(int id, int class_id, int point, char *title)
+void edit_assignment(int class_id, int id, char *title_name, int point)
 {
+
     int point_val = 0;
     if(! check_valid_class_id(class_id))
     {
@@ -53,12 +54,80 @@ void edit_assignment(int id, int class_id, int point, char *title)
         }
     }
 
-    if(strlen(title) < 5)
+    char title[30];
+    memcpy(title, title_name, 30);
+    null_terminate_name(title, strlen(title));
+
+    FILE *fp;
+    struct assignment data;
+    int counter = 0;
+    int found = 0;
+
+    fp = fopen("assignments.db", "r+");
+
+    if(fp == NULL)
     {
-        printf("Assignment Title must be atleast 5 characters \n");
+        printf("\n Error: Cannot open file");
+        exit(1);
+    }
+
+    while(fread(&data, sizeof(struct assignment), 1, fp))
+    {
+        if (data.id == id && data.class_id == class_id)
+        {
+            found = 1;
+            break;
+        }
+        counter++; 
+    }
+
+    if(! found)
+    {
+        printf("Given data not found in the Assignment Database\n");
+        fclose(fp);
         return;
     }
 
+    else
+    {
+        fseek(fp, counter*sizeof(struct assignment), SEEK_SET);
+
+        fread(&data, sizeof(struct assignment), 1, fp);
+
+        if (strcmp(title,"NULL_CHAR") == 0 && point == 662497 )
+        {
+            printf("Nothing in the database changed\n\n");
+            fclose(fp);
+            return;
+        }
+
+        else if (strcmp(title,"NULL_CHAR") == 0)
+        {
+            data.point = point;
+            fseek(fp, counter*sizeof(struct assignment), SEEK_SET);
+            fwrite (&data, sizeof(struct assignment), 1, fp); 
+            printf("Point in the database changed\n\n");
+        }
+
+        else if (point == 662497 )
+        {
+            memcpy(data.title, title, 30);
+            fseek(fp, counter*sizeof(struct assignment), SEEK_SET);
+            fwrite (&data, sizeof(struct assignment), 1, fp); 
+            printf("Title in the database changed\n\n");
+
+        }
+
+        else
+        {
+            memcpy(data.title, title, 30);
+            data.point = point;
+            fseek(fp, counter*sizeof(struct assignment), SEEK_SET);
+            fwrite (&data, sizeof(struct assignment), 1, fp); 
+            printf("Both title and point changed in the database\n\n");
+        }
+        fclose(fp);
+    }
 
     
 }
@@ -68,12 +137,14 @@ void edit_assignment_menu()
     int id;
     int class_id;
     int point;
+    int check = 0;
     char grade[10];
     char title[30];
 
     printf("Enter Class ID or (-1 for Class List): ");
     scanf("%d", &class_id);
-    getchar();
+    clear_buffer();
+
     if(class_id == -1)
     {
         view_class();
@@ -81,14 +152,19 @@ void edit_assignment_menu()
         return;
     }
 
-    printf("Enter Assignment ID or (-1 for Assignment List): ");
-    scanf("%d", &id);
-    getchar();
-    if(id == -1)
+    while(check != 1)
     {
-        view_assignment();
-        edit_assignment_menu();
-        return;
+        printf("Enter Assignment ID or (-1 for Assignment List): ");
+        scanf("%d", &id);
+        clear_buffer();
+        if(id != -1)
+        {
+            check = 1;
+        }
+        else
+        {
+            view_assignment();
+        }
     }
 
     printf("\nEnter New Title (or leave blank for no change): ");
@@ -103,7 +179,7 @@ void edit_assignment_menu()
         delete_endline(title);
     }
 
-    printf("Enter New Earned Point (or leave blank for no change): ");
+    printf("Enter New  Point Value(or leave blank for no change): ");
     fgets(grade, 10, stdin);
     if(grade[0] == '\n')
     {
@@ -114,6 +190,5 @@ void edit_assignment_menu()
         point = atoi(grade);
     }
 
-    //printf("Point = %d, Class Id = %d, Assignment Id = %d, Title = %s\n\n", point,class_id,id,title);
-    edit_assignment(id,  class_id,  point, title);
+    edit_assignment(class_id,  id,  title, point);
 }
